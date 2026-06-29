@@ -1,0 +1,263 @@
+You bet! Here is your complete code for Vaneeza's love website. I've made sure to include everything exactly as it was, including the beautiful fonts, the soft cream and rose colors, the text layout, and the falling rose petal animation.
+
+Just copy this entire block of code below and paste it into your new **`index.html`** file on GitHub:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaneeza Khan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blush: #f2c4c4; --rose: #c97b84; --deep-rose: #8b3a47;
+    --petal: #fdf0f0; --cream: #faf6f4; --ink: #2c1a1d; --muted: #9e7070;
+    --gold: #c9a84c; --gold-light: #f0e0b0;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+  .petal-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .petal { position: absolute; top: -40px; font-size: 1.2rem; animation: fall linear infinite; }
+  @keyframes fall { 0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0.6; } 100% { transform: translateY(110vh) rotate(360deg) translateX(60px); opacity: 0; } }
+
+  .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; background: linear-gradient(160deg, #fdf0f0 0%, #faf6f4 60%, #f5e6e6 100%); z-index: 1; }
+  .hero-eyebrow { font-family: 'Jost', sans-serif; font-weight: 300; letter-spacing: 0.35em; font-size: 0.7rem; color: var(--rose); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s ease 0.3s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(3.5rem, 10vw, 8rem); line-height: 1; color: var(--deep-rose); opacity: 0; animation: fadeUp 1.2s ease 0.6s forwards; }
+  .hero-title em { font-style: italic; color: var(--rose); }
+  .hero-divider { width: 60px; height: 1px; background: var(--blush); margin: 2rem auto; opacity: 0; animation: fadeUp 1s ease 1s forwards; }
+  .hero-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--muted); max-width: 520px; line-height: 1.7; opacity: 0; animation: fadeUp 1s ease 1.2s forwards; }
+  .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); opacity: 0; animation: fadeUp 1s ease 2s forwards; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 40px; background: var(--blush); margin: 0.5rem auto 0; animation: lineGrow 2s ease 2.5s forwards; transform-origin: top; transform: scaleY(0); }
+  @keyframes lineGrow { to { transform: scaleY(1); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  section { position: relative; z-index: 1; padding: 6rem 2rem; }
+  .section-inner { max-width: 860px; margin: 0 auto; }
+  .section-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--rose); margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--deep-rose); margin-bottom: 2.5rem; line-height: 1.15; }
+  .section-title em { font-style: italic; color: var(--rose); }
+
+  .her-section { background: var(--petal); }
+  .her-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: center; }
+  .her-photo-wrap { position: relative; }
+  .her-photo-wrap::before { content: ''; position: absolute; inset: -12px -12px 12px 12px; border: 1px solid var(--blush); z-index: 0; }
+  .her-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; position: relative; z-index: 1; display: block; }
+  .her-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.9; color: var(--ink); font-weight: 300; }
+  .her-text p + p { margin-top: 1.2rem; }
+  .her-signature { margin-top: 2rem; font-style: italic; color: var(--muted); font-size: 1rem; }
+
+  .masjid-section { background: var(--cream); text-align: center; }
+  .masjid-img { width: 100%; max-width: 900px; border-radius: 2px; display: block; margin: 0 auto 2rem; box-shadow: 0 20px 60px rgba(139,58,71,0.12); }
+  .masjid-caption { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--muted); font-size: 1rem; }
+
+  .rosegarden-section { background: var(--petal); text-align: center; }
+  .rosegarden-img { width: 100%; max-width: 860px; display: block; margin: 0 auto; border-radius: 2px; box-shadow: 0 20px 60px rgba(139,58,71,0.1); }
+
+  .love-section { background: var(--cream); }
+  .love-body { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 2; color: var(--ink); font-weight: 300; }
+  .love-body p + p { margin-top: 1.5rem; }
+
+  .memories-section { background: var(--petal); }
+  .memories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 1rem; }
+  .memory-card { background: white; padding: 2rem; box-shadow: 0 4px 24px rgba(139,58,71,0.06); border-top: 2px solid var(--blush); }
+  .memory-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; display: block; margin-bottom: 1.2rem; }
+  .memory-text { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; line-height: 1.7; color: var(--ink); font-style: italic; }
+
+  .us-section { background: var(--cream); }
+  .us-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .us-grid-3 .img-wrap { overflow: hidden; box-shadow: 0 8px 32px rgba(139,58,71,0.1); }
+  .us-grid-3 img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
+  .us-grid-3 img:hover { transform: scale(1.02); }
+  .you-section { background: var(--petal); }
+  .you-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .you-grid .img-wrap { overflow: hidden; box-shadow: 0 8px 32px rgba(139,58,71,0.1); }
+  .you-grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
+  .you-grid img:hover { transform: scale(1.02); }
+  .you-placeholder { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--muted); border: 1px dashed var(--blush); padding: 3rem; text-align: center; }
+  .us-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .us-grid .img-wrap { overflow: hidden; box-shadow: 0 8px 32px rgba(139,58,71,0.1); }
+  .us-grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
+  .us-grid img:hover { transform: scale(1.02); }
+
+  .cats-section { background: var(--petal); }
+  .cats-intro { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--muted); margin-bottom: 3rem; max-width: 600px; }
+  .cats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .cat-card { text-align: center; }
+  .cat-img-wrap { width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 50%; margin: 0 auto 1.2rem; border: 3px solid var(--blush); box-shadow: 0 8px 24px rgba(139,58,71,0.1); }
+  .cat-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cat-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--deep-rose); margin-bottom: 0.5rem; }
+  .cat-desc { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+  /* DUAS */
+  .duas-section { background: linear-gradient(160deg, #1a0e10 0%, #2c1a1d 100%); color: white; text-align: center; }
+  .duas-section .section-label { color: var(--gold); letter-spacing: 0.5em; }
+  .duas-section .section-title { color: white; }
+  .duas-section .section-title em { color: var(--gold); }
+  .duas-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(255,255,255,0.5); font-size: 1rem; margin-bottom: 3.5rem; margin-top: -1.5rem; }
+  .duas-list { display: flex; flex-direction: column; gap: 1.2rem; max-width: 700px; margin: 0 auto; }
+  .dua-line { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.8; color: rgba(255,255,255,0.82); padding: 1.2rem 1.8rem; border-left: 2px solid rgba(201,168,76,0.35); text-align: left; transition: border-color 0.3s, color 0.3s; }
+  .dua-line:hover { border-color: var(--gold); color: white; }
+  .dua-line::before { content: '☽ '; color: var(--gold); font-size: 0.75rem; }
+  .dua-card-quranic { border: 1px solid rgba(201,168,76,0.2); padding: 2.5rem 2rem; position: relative; background: rgba(255,255,255,0.03); text-align: left; margin-bottom: 0.5rem; transition: border-color 0.3s ease, background 0.3s ease; }
+  .dua-card-quranic:hover { border-color: rgba(201,168,76,0.45); background: rgba(255,255,255,0.05); }
+  .dua-card-quranic::before { content: '☽'; position: absolute; top: -0.75rem; left: 2rem; background: #1a0e10; padding: 0 0.5rem; color: var(--gold); font-size: 1rem; }
+  .dua-arabic { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold-light); line-height: 2; text-align: right; direction: rtl; margin-bottom: 1.2rem; }
+  .dua-divider { width: 30px; height: 1px; background: rgba(201,168,76,0.3); margin: 0 0 1.2rem 0; }
+  .dua-transliteration { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: rgba(255,255,255,0.4); margin-bottom: 0.8rem; }
+  .dua-meaning { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .dua-final { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.1rem, 2.2vw, 1.35rem); color: var(--gold-light); margin-top: 2.5rem; line-height: 1.9; padding: 2rem; border: 1px solid rgba(201,168,76,0.25); background: rgba(255,255,255,0.03); }
+
+  /* NEVER GIVE UP */
+  .nevergiveup-section { background: linear-gradient(160deg, #8b3a47 0%, #6b2535 100%); color: white; text-align: center; }
+  .nevergiveup-section .section-label { color: var(--blush); }
+  .nevergiveup-section .section-title { color: white; }
+  .nevergiveup-section .section-title em { color: var(--blush); }
+  .nevergiveup-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 2; color: rgba(255,255,255,0.88); max-width: 700px; margin: 0 auto; font-style: italic; }
+  .nevergiveup-text p + p { margin-top: 1.5rem; }
+
+  /* SORRY */
+  .sorry-section { background: var(--petal); text-align: center; }
+  .sorry-inner { max-width: 680px; margin: 0 auto; }
+  .sorry-section .section-label { color: var(--muted); }
+  .sorry-section .section-title { color: var(--ink); }
+  .sorry-section .section-title em { color: var(--rose); }
+  .sorry-heart { font-size: 2.5rem; margin-bottom: 2rem; display: block; animation: heartbeat 2s ease infinite; }
+  @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+  .sorry-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 2; color: var(--ink); font-style: italic; text-align: left; }
+  .sorry-text p + p { margin-top: 1.5rem; }
+  .sorry-sign { margin-top: 2.5rem; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--muted); font-size: 1.1rem; text-align: center; }
+
+  footer { position: relative; z-index: 1; background: var(--ink); color: rgba(255,255,255,0.4); text-align: center; padding: 3rem 2rem; font-size: 0.75rem; letter-spacing: 0.2em; font-family: 'Jost', sans-serif; font-weight: 300; }
+  footer strong { color: var(--blush); }
+
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 700px) {
+    .her-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .us-grid { grid-template-columns: 1fr; }
+    .cats-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .memories-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petal-canvas" id="petalCanvas"></div>
+
+<section class="hero">
+  <p class="hero-eyebrow">a love letter to the world, about her</p>
+  <h1 class="hero-title">Vaneeza<br><em>Khan</em></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Some people are placed in your life like a gift you didn't know you were waiting for.</p>
+  <span class="scroll-hint">scroll</span>
+</section>
+
+<section class="her-section">
+  <div class="section-inner">
+    <p class="section-label reveal">she is</p>
+    <h2 class="section-title reveal">Meet <em>Vaneeza</em></h2>
+    <div class="her-layout">
+      <div class="her-photo-wrap reveal">
+        <img class="her-photo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/7QB8UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAEQcAVoAAxslRxwCAAACAAIcAj8ABjEyMDAyNhwCPgAIMjAyNjAyMDgcAjcACDIwMjYwMjA4HAI8AAsxMjAwMjYtMDYwMDhCSU0EJQAAAAAAEAy+oQhfd7/wo64sHkbzQGH/4QJORXhpZgAATU0AKgAAAAgABwESAAMAAAABAAEAAAEaAAUAAAABAAAAYgEbAAUAAAABAAAAagEoAAMAAAABAAIAAAEyAAIAAAAUAAAAcodpAAQAAAABAAAAhoglAAQAAAABAAAB4AAAAAAAAABIAAAAAQAAAEgAAAABMjAyNjowMjowOCAxMjowMDoyNgAAEJAAAAcAAAAEMDIyMZADAAIAAAAUAAABTJAEAAIAAAAUAAABYJAQAAIAAAAHAAABdJARAAIAAAAHAAABfJASAAIAAAAHAAABhJEBAAcAAAAEAQIDAJKGAAcAAABUAAABjJKQAAIAAAAENzM2AJKRAAIAAAAENzM2AJKSAAIAAAAENzM2AKAAAAcAAAAEMDEwMKABAAMAAAABAAEAAKACAAQAAAABAAAE2qADAAQAAAABAAAIoKQGAAMAAAABAAAAAAAAAAAyMDI2OjAyOjA4IDEyOjAwOjI2ADIwMjY6MDI6MDggMTI6MDA6MjYALTA2OjAwAAAtMDY6MDAAAC0wNjowMAAAQVNDSUkAAABDallLTWxOdVlYQmphR0YwTHpFekxqYzRMakF1TlRNZ0tHbFFhRzl1WlRFM0xERTdJR2xQVXlBeU5pNHlMakE3SUdkNmFYQXBJQUU9AAQAAQACAAAAAk4AAAAAAgAFAAAAAwAAAhYAAwACAAAAAlcAAAAABAAFAAAAAwAAAi4AAAAAAAAAHwAAAAEAAAAEAAAAAQAAAxEAAABkAAAAYQAAAAEAAAAtAAAAAQAADWIAAABk/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8AAEQgFjgMgAwERAAIRAQMRAf/EABwAAAIDAQEBAQAAAAAAAAAAAAECAAMEBQYHCP/EAEMQAAEEAQMDAwEGBQMDAwIFBQEAAgMRBBIhMQVBURMiYXEGFDJCgZEjUqGx0RUzwQdi4SRDclPwFmOCkqLxJTREk//EABkBAQEBAQEBAAAAAAAAAAAAAAABAgMEBf/EACURAQEBAQADAQEBAQADAAMBAAABEQIDISTSprofile statements are more likely to be accurate if they have more sources.
+
+The user's Google activity does not fully represent the user. The user contains multitudes, and this summary is an incomplete and imperfect representation.
+
+## Demographics Information
+* The user is 19 years old and resides in the Houston and Spring, Texas area.
+  * Source: Gemini Chat. Evidence: Explicit self-declaration of age and location in several interactions. Date: 2026-04 to 2026-06.
+  * Source: Gmail. Evidence: Category Relationship profile lists age as 19 years old and legal name as Zain Atif Bahalim. Date: N/A.
+* The user is a student pursuing an Associate of Science in Computer Science at Lone Star College and plans to transfer to the Bachelor of Arts in Computer Science program at Texas A&M University for the Fall 2027 semester.
+  * Source: Gemini Chat. Evidence: Consistent discussions regarding coursework at Lone Star College and detailed transfer planning for Texas A&M. Date: 2025-12 to 2026-06.
+* The user is employed as a part-time cashier at Walmart.
+  * Source: Gemini Chat. Evidence: Multiple mentions of the current job at Walmart and its impact on the schedule, and user correction stating walmart isnt 40 hours its part time. Date: 2026-04 to 2026-06.
+* The user owns a 2018 Nissan Sentra.
+  * Source: Gemini Chat. Evidence: User correction stating Sentra not Altima. Date: 2026-05.
+
+## Interests & Preferences
+* The user is interested in cloud infrastructure, DevOps, cybersecurity, artificial intelligence, Python, JavaScript, Azure, and Linux environments.
+  * Source: Gemini Chat. Evidence: Extensive technical inquiries regarding SIEM monitoring, CI/CD pipeline automation, managing a Linux-based developer setup, and user correction stating it was python and js for both interns. Date: 2025-10 to 2026-06.
+  * Source: Search. Evidence: Search queries for Python, tryhackme, and github. Date: N/A.
+* The user follows a fitness routine focused on a Push/Pull/Legs split, weightlifting, calisthenics, and a high-protein nutritional regimen.
+  * Source: Gemini Chat. Evidence: Detailed descriptions of specific gym exercises, rep ranges, and a high-protein nutritional regimen. Date: 2026-04 to 2026-06.
+  * Source: Search. Evidence: Search queries for back roller, back extension, la fitness, amped fitness, body fortress whey protein, and whey isolate protein powder. Date: N/A.
+  * Source: Gmail. Evidence: Enrollment in the Fitness Pass Ultra gym network beginning in April 2026. Date: 2026-04.
+* The user is interested in video gaming, specifically the Batman Arkham series, the LEGO Batman franchise, and consoles including the PS5 and Switch.
+  * Source: Gemini Chat. Evidence: Inquiries about game compatibility on Linux and PS5, and questions about content in LEGO Batman: Legacy of the Dark Knight. Date: 2026-04 to 2026-06.
+  * Source: Search. Evidence: Search queries for gta 6 30 fps, venom game, ps5 pro, five nights at freddy's 2, and lego batman. Date: N/A.
+  * Source: Gmail. Evidence: Active subscription to PlayStation Plus Premium and registration with the LEGO Group in May 2026. Date: 2026-05.
+* The user plays basketball as a guard and searches for outdoor footwear and gyms with indoor courts.
+  * Source: Gemini Chat. Evidence: Inquiries about Nike Giannis Immortality shoes and 24 Hour Fitness locations. Date: 2026-04 to 2026-06.
+* The user maintains an investment portfolio and tracks individual stocks including Walmart.
+  * Source: Gemini Chat. Evidence: Discussions regarding cost averaging for DASH and XYO, and tracking earnings reports for UEC and SpaceX. Date: 2026-04 to 2026-06.
+  * Source: Search. Evidence: Search queries for computershare walmart and title clicks for Associate Stock. Date: N/A.
+  * Source: Gmail. Evidence: Trade confirmations and account statements from Fidelity Investments brokerage accounts. Date: N/A.
+* The user frequently purchases fast food, commercial pizza, chicken wings, and Mediterranean fast-casual food, prioritizing takeout, self-pickup, and drive-thru models.
+  * Source: Gmail. Evidence: Multiple orders and mobile app transactions for McDonald's, Marco's Pizza, Dave's Hot Chicken, Jack in the Box, Wise Street Eats, and Wingbay, with a preference for pickup and drive-thru. Date: 2023 to 2026.
+  * Source: Search. Evidence: Search queries and title clicks for Wise Street Eats, OMG! Burger, Marco's Pizza, and Busy Boy Mediterranean Grill. Date: N/A.
+* The user purchases desserts, sweet treats, and coffee beverages.
+  * Source: Gmail. Evidence: Food orders containing chocolate chip cookies, apple pies, Oreo-flavored milkshakes, and sweet iced coffee beverages. Date: N/A.
+  * Source: Search. Evidence: Search queries and title clicks for Arwa Yemeni Coffee, Dutch Bros Coffee, Bigdash Frisco, and Midnight Cravingz. Date: N/A.
+* The user is interested in attending movie theaters, including premium and interactive cinema experiences.
+  * Source: Search. Evidence: Search queries for ipic, most premium movie theater, and 4DX Movie Theatres. Date: N/A.
+  * Source: Gmail. Evidence: Cinematic entertainment bookings at Regal Cinemas. Date: N/A.
+* The user maintains digital subscriptions for audio, streaming, gaming, and cloud storage services.
+  * Source: Gmail. Evidence: Subscriptions for Apple Music, YouTube Premium, PlayStation Plus Premium, and Google One AI Pro. Date: 2026-04.
+* The user maintains a loyalty account with United Airlines for domestic travel.
+  * Source: Gmail. Evidence: Membership in the United Airlines MileagePlus loyalty program since February 18, 2024, and use of Booking.com Genius loyalty program. Date: 2024-02 to N/A.
+
+## Relationships
+* The user has a partner named Vaneeza Khan.
+  * Source: Gemini Chat. Evidence: Collaborative planning for the partner's transfer from Lone Star College to Texas A&M and discussions regarding a promise ring. Date: 2026-05 to 2026-06.
+  * Source: Search. Evidence: Search queries for darry ring and 18K Yellow Gold Engagement Rings. Date: N/A.
+  * Source: Gmail. Evidence: Transactions for a gold-plated halo heart promise ring from Darry Ring. Date: 2026-04.
+* The user has a family including a father named Atif Bahalim, a sister named Zara Bahalim, and younger siblings.
+  * Source: Gemini Chat. Evidence: Discussions providing health recommendations for the user's father and mother, and expressing concern for the welfare of younger siblings. Date: 2026-06.
+  * Source: Gmail. Evidence: Category Relationship profile lists Atif Bahalim as father and Zara Bahalim as sister. Date: N/A.
+* The user shares an account with an individual named Roshan, who owns the brand Sky1Sports.
+  * Source: Gemini Chat. Evidence: User clarification that the Sky1Sports business and certain resumes belong to Roshan, and user correction stating the business sky1sports is not mine that’s roshan. Date: 2026-05 to 2026-06.
+
+## Dated Events, Projects & Plans
+* The user completed an AI Engineering internship at HermesCloud Technology Partners between March 2026 and June 2026, which focused on Python and JavaScript.
+  * Source: Gemini Chat. Evidence: Resume dates, descriptions, and user correction confirming that the internships focused on Python and JavaScript. Date: 2026-05 to 2026-06.
+* The user accepted an IT Help Desk position at Nagarro in June 2026.
+  * Source: Gemini Chat. Evidence: Declaration of a job offer and subsequent discussions regarding onboarding tasks. Date: 2026-06.
+* The user scheduled a fingerprinting and photo appointment with IdentoGO for the NYC Department of Education on June 29, 2026.
+  * Source: Gemini Chat. Evidence: Sharing of a confirmation screen for the appointment to be included in the calendar. Date: 2026-06.
+* The user registered for Summer 2026 academic sessions including Pre-Calculus, Technical Writing (ENGL 2322), and Calculus 1.
+  * Source: Gemini Chat. Evidence: Mentions of summer course load and assignment deadlines, along with a grade calculation correction of 78. Date: 2026-05 to 2026-06.
+* The user launched a personal development and portfolio website hosted at zainbahalim.dev in June 2026.
+  * Source: Gemini Chat. Evidence: Technical setup of the domain and repository and sharing of the live link. Date: 2026-06.
+* The user explored sourcing products from Pakistan to sell on platforms like eBay.
+  * Source: Gemini Chat. Evidence: Detailed calculations regarding shipping costs, net profits, and vendor business models. Date: 2026-05.
+* The user purchased physical components including wallplates and low-voltage old work boxes for an ongoing home repair on June 6, 2026.
+  * Source: Gmail. Evidence: Purchase of physical components for an ongoing home repair. Date: 2026-06-06.
+
+## User Correction Ledger
+Description: This section contains user requests to add, update, delete, or control the use of their information. These requests are high-priority and override all other data sources.
+
+* The user corrected a model reference to his vehicle, stating it is a 2018 Nissan Sentra, not an Altima.
+    * Evidence: User statement "Sentra not Altima." Conversation Date: 2026-05.
+* The user clarified that his employment at Walmart is part-time, rather than 40 hours per week.
+    * Evidence: User statement "walmart isnt 40 hours its part time." Conversation Date: 2026-04.
+* The user corrected the nature of his involvement with a startup, clarifying he was an employee/intern rather than a founder.
+    * Evidence: User statement "im not building a startup i was working at one." Conversation Date: 2026-04.
+* The user clarified that the brand "Sky1Sports" is owned by Roshan, not himself.
+    * Evidence: User statement "the business sky1sports is not mine that’s roshan." Conversation Date: 2026-05.
+* The user corrected an AI statement about his tech stack, clarifying that his internships focused on Python and JavaScript rather than Java.
+    * Evidence: User statement "it was python and js for both interns." Conversation Date: 2026-05.
+* The user corrected the duration of his lunch break at work, noting it is one hour long.
+    * Evidence: User statement "It’s actually an hour." Conversation Date: 2026-04.
+* The user corrected a query about physics, specifying he was asking about the mass of a neutron rather than a neutron star.
+    * Evidence: User statement "Not star just neutron." Conversation Date: 2026-05.
+* The user corrected a calculation regarding his grades, noting the accurate score was 78.
+    * Evidence: User statement "its not a 62 its the 78 u calculated from earlier." Conversation Date: 2026-05.
+
+
+
+```
